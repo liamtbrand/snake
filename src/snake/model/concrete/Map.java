@@ -1,13 +1,11 @@
-package snake.engine.map;
-
-import snake.model.Map;
+package snake.model.concrete;
 
 /**
  * 
  * @author liamtbrand
  *
  */
-public class SnakeMap implements Map {
+public class Map implements snake.model.Map {
 	
 	private int[] _data;
 	private int _width;

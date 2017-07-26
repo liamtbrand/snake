@@ -5,15 +5,15 @@ import java.io.File;
 import snake.model.Map;
 
 public abstract class MapFactory {
-
+/*
 	public Map loadMap(File f) {
-		SnakeMap map = new SnakeMap();
+		Map map = new Map();
 		
-		return new SnakeMap();
+		return new Map();
 	}
 	
 	public Map makeMap() {
-		return new SnakeMap();
+		return new Map();
 	}
-	
+*/	
 }
