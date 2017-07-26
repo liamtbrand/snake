@@ -13,7 +13,7 @@ import snake.engine.object.GameObject;
  * @author liamtbrand
  *
  */
-public abstract class Stage {
+public class Stage {
 	
 	private Map _map;
 	private List<GameObject> _objects;
@@ -31,6 +31,9 @@ public abstract class Stage {
 	public void addSnake(Snake snake) {
 		_snakes.add(snake);
 	}
-	
+
+	public Map getMap() {
+		return _map;
+	}
 	
 }

@@ -17,7 +17,6 @@ public class FoodObject extends GameObject {
 	@Override
 	public void onCollision(Snake collider) {
 		collider.grow();
-		
 	}
 	
 }

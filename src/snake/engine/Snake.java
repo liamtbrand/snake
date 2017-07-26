@@ -90,6 +90,15 @@ public abstract class Snake {
 	}
 	
 	/**
+	 * Allows the direction of the snake to be set.
+	 * When the snake moves, it's head will move in this direction.
+	 * @param d
+	 */
+	public void setDirection(Direction d) {
+		_direction = d;
+	}
+	
+	/**
 	 * This will cause a new segment to be added to the tail of the snake.
 	 * The new segment will be at the same position as the last tail segment.
 	 * The snake will appear to grow the following move.
