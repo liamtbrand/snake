@@ -5,37 +5,27 @@ public class GameObject implements snake.model.GameObject {
 	private int _x;
 	private int _y;
 	
-	public GameObject(int x, int y) {
+	private Type _t;
+	
+	public GameObject(int x, int y, Type t) {
 		_x = x;
 		_y = y;
+		_t = t;
 	}
 
 	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _x;
 	}
 
 	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _y;
 	}
 
 	@Override
 	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return _t;
 	}
-
-	/**
-	 * This should be called when the object is collided with.
-	 * Object specific behaviour will then be actioned.
-	 * The collider is passed in case this is needed for something.
-	 * @param collider
-	 */
-	/*
-	public abstract void onCollision(Snake collider);
-	*/
 	
 }
