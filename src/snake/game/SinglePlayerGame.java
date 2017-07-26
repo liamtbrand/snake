@@ -6,7 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import snake.engine.render.BlockRenderEngine;
+import snake.model.concrete.test.TestMap;
+import snake.view.BlockRenderEngine;
 
 public class SinglePlayerGame {
 

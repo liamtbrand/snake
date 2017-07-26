@@ -1,24 +1,18 @@
-package snake.engine.stage;
+package snake.model.concrete;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import snake.engine.Snake;
-import snake.engine.map.Map;
-import snake.engine.object.GameObject;
+import snake.model.GameObject;
+import snake.model.Map;
+import snake.model.Snake;
 
-/**
- * The stage is the heart of game play.
- * The stage is comprised of a map, game objects, and snakes.
- * @author liamtbrand
- *
- */
-public class Stage {
-	
+public class Stage implements snake.model.Stage {
+
 	private Map _map;
 	private List<GameObject> _objects;
 	private List<Snake> _snakes;
-
+	
 	public Stage(Map map) {
 		_map = map;
 		_objects = new ArrayList<GameObject>();

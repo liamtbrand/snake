@@ -1,6 +1,4 @@
-package snake.engine.object;
-
-import snake.engine.Snake;
+package snake.model.concrete;
 
 /**
  * This is a base object of the game.
@@ -14,9 +12,10 @@ public class FoodObject extends GameObject {
 		super(x, y);
 	}
 
+	/*
 	@Override
 	public void onCollision(Snake collider) {
 		collider.grow();
-	}
+	}*/
 	
 }

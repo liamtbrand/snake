@@ -1,17 +1,8 @@
-package snake.engine;
+package snake.model.concrete;
 
 import java.util.List;
 
-/**
- * This abstract class controls most of the snakes ability in the game.
- * @author liamtbrand
- *
- */
-public abstract class Snake {
-	
-	public enum Direction {
-		NORTH, SOUTH, EAST, WEST
-	}
+public class Snake implements snake.model.Snake {
 	
 	public class SnakeSegment {
 		private int x;
@@ -27,6 +18,8 @@ public abstract class Snake {
 	private int _y;
 	private Direction _direction;
 	
+	// TODO refine this more.
+	
 	public Snake(int x, int y, Direction direction,int length) {
 		_x = x;
 		_y = y;
@@ -35,37 +28,34 @@ public abstract class Snake {
 		}
 		_direction = direction;
 	}
-
-	/**
-	 * Tests whether any part of the snake is on a given tile.
-	 * @return True if the snake is at this tile.
-	 */
+	
+	@Override
 	public boolean isAt(int x, int y) {
 		for(SnakeSegment segment : _segments) {
 			if(segment.x == x && segment.y == y) {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	
+	@Override
 	public int getHeadX() {
 		return _x;
 	}
 	
+	@Override
 	public int getHeadY() {
 		return _y;
 	}
 	
+	@Override
 	public int getLength() {
 		return _segments.size();
 	}
 	
-	/**
-	 * This moves the snake by 1 tile in the game.
-	 * The snake will move onto this tile.
-	 * Before calling this, you should check if the snake can really move here.
-	 */
+	@Override
 	public void move() {
 		switch(_direction) {
 			case NORTH:
@@ -88,21 +78,13 @@ public abstract class Snake {
 		_segments.remove(_segments.size());
 		_segments.add(0, s);
 	}
-	
-	/**
-	 * Allows the direction of the snake to be set.
-	 * When the snake moves, it's head will move in this direction.
-	 * @param d
-	 */
+
+	@Override
 	public void setDirection(Direction d) {
 		_direction = d;
 	}
 	
-	/**
-	 * This will cause a new segment to be added to the tail of the snake.
-	 * The new segment will be at the same position as the last tail segment.
-	 * The snake will appear to grow the following move.
-	 */
+	@Override
 	public void grow() {
 		_segments.add(new SnakeSegment(_x,_y));
 	}

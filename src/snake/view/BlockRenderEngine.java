@@ -1,4 +1,4 @@
-package snake.engine.render;
+package snake.view;
 
 import java.awt.Graphics;
 

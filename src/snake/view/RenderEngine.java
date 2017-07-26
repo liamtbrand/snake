@@ -1,6 +1,6 @@
-package snake.engine.render;
+package snake.view;
 
-import snake.engine.stage.Stage;
+import snake.model.Stage;
 
 public abstract class RenderEngine {
 	

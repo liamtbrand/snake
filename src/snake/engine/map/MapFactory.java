@@ -2,6 +2,8 @@ package snake.engine.map;
 
 import java.io.File;
 
+import snake.model.Map;
+
 public abstract class MapFactory {
 
 	public Map loadMap(File f) {

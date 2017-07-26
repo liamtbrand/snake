@@ -1,4 +1,4 @@
-package snake.engine.map;
+package snake.model;
 
 /**
  * The map interface allows for interaction with the map.
@@ -10,17 +10,8 @@ package snake.engine.map;
  *
  */
 public interface Map {
-	
-	/**
-	 * 
-	 * @return How wide the map is.
-	 */
+
 	public int getWidth();
-	
-	/**
-	 * 
-	 * @return How high the map is.
-	 */
 	public int getHeight();
 	
 	/**

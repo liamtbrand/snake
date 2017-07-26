@@ -1,11 +1,12 @@
 package snake.engine;
 
-import snake.engine.map.Map;
-import snake.engine.stage.Stage;
+import snake.model.Map;
+import snake.model.Snake;
+import snake.model.concrete.Stage;
 
 public abstract class Engine extends Thread {
 
-	private Stage _stage;
+	private snake.model.Stage _stage;
 	
 	private volatile boolean _running;
 	
@@ -76,7 +77,7 @@ public abstract class Engine extends Thread {
 		return null;
 	}
 	
-	public Stage getStage() {
+	public snake.model.Stage getStage() {
 		return _stage;
 	}
 	

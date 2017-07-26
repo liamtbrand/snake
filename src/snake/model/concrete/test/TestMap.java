@@ -1,6 +1,6 @@
-package snake.game;
+package snake.model.concrete.test;
 
-import snake.engine.map.Map;
+import snake.model.Map;
 
 public class TestMap implements Map {
 	

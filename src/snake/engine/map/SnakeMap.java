@@ -1,5 +1,7 @@
 package snake.engine.map;
 
+import snake.model.Map;
+
 /**
  * 
  * @author liamtbrand

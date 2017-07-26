@@ -1,6 +1,6 @@
 package snake.engine;
 
-import snake.engine.Snake.Direction;
+import snake.model.Snake.Direction;
 
 public abstract class Controls {
 	
