@@ -1,5 +1,6 @@
 package snake.model.concrete;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Snake implements snake.model.Snake {
@@ -23,6 +24,7 @@ public class Snake implements snake.model.Snake {
 	public Snake(int x, int y, Direction direction,int length) {
 		_x = x;
 		_y = y;
+		_segments = new ArrayList<SnakeSegment>();
 		for(int i = 0; i < length; i++) {
 			grow();
 		}
@@ -41,42 +43,8 @@ public class Snake implements snake.model.Snake {
 	}
 	
 	@Override
-	public int getHeadX() {
-		return _x;
-	}
-	
-	@Override
-	public int getHeadY() {
-		return _y;
-	}
-	
-	@Override
 	public int getLength() {
 		return _segments.size();
-	}
-	
-	@Override
-	public void move() {
-		switch(_direction) {
-			case NORTH:
-				_y -= 1;
-				break;
-			case SOUTH:
-				_y += 1;
-				break;
-			case EAST:
-				_x += 1;
-				break;
-			case WEST:
-				_x -= 1;
-				break;
-			default:
-				System.out.println("Impossible! - How?");
-				break;
-		}
-		SnakeSegment s = _segments.get(_segments.size());
-		_segments.remove(_segments.size());
-		_segments.add(0, s);
 	}
 
 	@Override
@@ -87,6 +55,35 @@ public class Snake implements snake.model.Snake {
 	@Override
 	public void grow() {
 		_segments.add(new SnakeSegment(_x,_y));
+	}
+
+	@Override
+	public int getSegmentX(int segment) {
+		return _segments.get(segment).x;
+	}
+
+	@Override
+	public int getSegmentY(int segment) {
+		return _segments.get(segment).y;
+	}
+
+	@Override
+	public void moveTo(int x, int y) {
+		SnakeSegment s = _segments.get(_segments.size()-1);
+		_segments.remove(_segments.size()-1);
+		s.x = x;
+		s.y = y;
+		_segments.add(0, s);
+	}
+
+	@Override
+	public Direction getDirection() {
+		return _direction;
+	}
+
+	@Override
+	public void shrink() {
+		_segments.remove(_segments.size()-1);
 	}
 	
 }

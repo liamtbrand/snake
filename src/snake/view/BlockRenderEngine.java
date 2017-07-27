@@ -1,6 +1,10 @@
 package snake.view;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Iterator;
+
+import snake.model.Snake;
 
 public class BlockRenderEngine extends RenderEngine {
 
@@ -19,8 +23,26 @@ public class BlockRenderEngine extends RenderEngine {
 		}
 	}
 	
+	private void renderSnakes(Graphics g) {
+		Iterator<Snake> snakes = _stage.getSnakeIterator();
+		Snake snake;
+		int snakeLength;
+		while(snakes.hasNext()) {
+			snake = snakes.next();
+			
+			g.setColor(new Color(0.8f,0.5f,0.5f));
+			g.fillRect(snake.getSegmentX(0)*10, snake.getSegmentY(0)*10, 10, 10);
+			g.setColor(new Color(0.5f,0.5f,0.8f));
+			for(int i = 1; i < snake.getLength(); i++) {
+				g.fillRect(snake.getSegmentX(i)*10, snake.getSegmentY(i)*10, 10, 10);
+			}
+		}
+		g.setColor(new Color(0.0f,0.0f,0.0f));
+	}
+	
 	public void renderStage(Graphics g) {
 		renderMap(g);
+		renderSnakes(g);
 	}
 	
 }
