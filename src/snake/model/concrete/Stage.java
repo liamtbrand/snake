@@ -2,6 +2,7 @@ package snake.model.concrete;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Set;
 
 import snake.model.GameObject;
 import snake.model.Map;
@@ -76,10 +77,15 @@ public class Stage implements snake.model.Stage {
 			throw new InvalidIdException();
 		}
 	}
-
+	
 	@Override
 	public Iterator<GameObject> getGameObjectIterator() {
 		return Collections.unmodifiableCollection(_objects.values()).iterator();
+	}
+
+	@Override
+	public Set<Integer> getGameObjectIds() {
+		return Collections.unmodifiableSet(_objects.keySet());
 	}
 
 	@Override
@@ -113,6 +119,11 @@ public class Stage implements snake.model.Stage {
 	public Iterator<Snake> getSnakeIterator() {
 		return Collections.unmodifiableCollection(_snakes.values()).iterator();
 	}
+	
+	@Override
+	public Set<Integer> getSnakeIds() {
+		return Collections.unmodifiableSet(_snakes.keySet());
+	}
 
 	@Override
 	public void setMap(Map map) {
@@ -121,7 +132,7 @@ public class Stage implements snake.model.Stage {
 
 	@Override
 	public Map getMap() {
-		return _map;
+		return _map; // TODO make unmodifiable?
 	}
 	
 }

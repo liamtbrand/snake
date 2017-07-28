@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Iterator;
 
+import snake.model.GameObject;
 import snake.model.Snake;
 
 public class BlockRenderEngine extends RenderEngine {
@@ -20,6 +21,18 @@ public class BlockRenderEngine extends RenderEngine {
 					g.fillRect(x*10, y*10, 10, 10);
 				}
 			}
+		}
+	}
+	
+	private void renderGameObjects(Graphics g) {
+		Iterator<GameObject> objects = _stage.getGameObjectIterator();
+		GameObject object;
+		while(objects.hasNext()) {
+			object = objects.next();
+			
+			g.setColor(new Color(0.5f,0.8f,0.5f));
+			g.fillRect(object.getX()*10, object.getY()*10, 10, 10);
+			g.setColor(new Color(0.0f,0.0f,0.0f));
 		}
 	}
 	
@@ -42,6 +55,7 @@ public class BlockRenderEngine extends RenderEngine {
 	
 	public void renderStage(Graphics g) {
 		renderMap(g);
+		renderGameObjects(g);
 		renderSnakes(g);
 	}
 	

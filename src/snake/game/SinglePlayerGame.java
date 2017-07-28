@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import snake.model.Stage.InvalidIdException;
+import snake.model.concrete.GameObject;
 import snake.model.concrete.test.TestMap;
 import snake.view.BlockRenderEngine;
 
@@ -27,6 +28,7 @@ public class SinglePlayerGame {
 		
 		try {
 			engine.getStage().addSnake(0, new TestSnake());
+			engine.getStage().addGameObject(0, new GameObject(1,4,GameObject.Type.FOOD));
 		} catch (InvalidIdException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,9 +1,12 @@
 package snake.engine;
 
 import java.util.Iterator;
+import java.util.Set;
 
+import snake.model.GameObject;
 import snake.model.Map;
 import snake.model.Snake;
+import snake.model.Stage.InvalidIdException;
 import snake.model.concrete.Stage;
 
 public abstract class Engine extends Thread {
@@ -50,13 +53,16 @@ public abstract class Engine extends Thread {
 	}
 	
 	public synchronized void run() {
+		
 		_running = true;
 		_lastTick = time();
 		long elapsed = 0;
+		
 		while(_running) {
 			
 			// GAME LOGIC TODO
 			
+			// For each snake on the map, do the logic for this snake.
 			Iterator<Snake> snakes = _stage.getSnakeIterator();
 			Snake snake;
 			int dx, dy;
@@ -82,6 +88,29 @@ public abstract class Engine extends Thread {
 						System.out.println("Impossible?");
 						break;
 				}
+				
+				// Do the logic for each object.
+				GameObject object;
+				for(int key : _stage.getGameObjectIds()) {
+					try {
+						object = _stage.getGameObject(key);
+						
+						if(	object.getX() == snake.getSegmentX(0) + dx &&
+							object.getY() == snake.getSegmentY(0) + dy
+						) {
+							if(object.getType() == GameObject.Type.FOOD) {
+								_stage.removeGameObject(key);
+								snake.grow();
+							}
+						}
+						
+					} catch (InvalidIdException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				// Do the logic for each foreign snake.
+				
 				
 				snake.moveTo(
 					(snake.getSegmentX(0)+dx+_stage.getMap().getWidth())%_stage.getMap().getWidth(),

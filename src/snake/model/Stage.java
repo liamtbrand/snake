@@ -1,6 +1,7 @@
 package snake.model;
 
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * The stage is the heart of game play.
@@ -28,12 +29,14 @@ public interface Stage {
 	public void removeGameObject(int id) throws InvalidIdException;
 	
 	public Iterator<GameObject> getGameObjectIterator();
+	public Set<Integer> getGameObjectIds();
 	
 	public void addSnake(int id, Snake snake) throws InvalidIdException;
 	public Snake getSnake(int id) throws InvalidIdException;
 	public void removeSnake(int id) throws InvalidIdException;
 	
 	public Iterator<Snake> getSnakeIterator();
+	public Set<Integer> getSnakeIds();
 	
 	public void setMap(Map map);
 	public Map getMap();
