@@ -1,6 +1,7 @@
 package snake.model.concrete;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -10,9 +11,9 @@ import snake.model.Snake;
 
 public class Stage implements snake.model.Stage {
 
-	private Map _map;
-	private java.util.Map<Integer,GameObject> _objects;
-	private java.util.Map<Integer,Snake> _snakes;
+	private volatile Map _map;
+	private volatile java.util.Map<Integer,GameObject> _objects;
+	private volatile java.util.Map<Integer,Snake> _snakes;
 	
 	public Stage(Map map) {
 		clearStage();
@@ -84,8 +85,8 @@ public class Stage implements snake.model.Stage {
 	}
 
 	@Override
-	public Set<Integer> getGameObjectIds() {
-		return Collections.unmodifiableSet(_objects.keySet());
+	public synchronized Set<Integer> getGameObjectIds() {
+		return Collections.unmodifiableSet(new HashSet<Integer>(_objects.keySet()));
 	}
 
 	@Override
@@ -121,8 +122,8 @@ public class Stage implements snake.model.Stage {
 	}
 	
 	@Override
-	public Set<Integer> getSnakeIds() {
-		return Collections.unmodifiableSet(_snakes.keySet());
+	public synchronized Set<Integer> getSnakeIds() {
+		return Collections.unmodifiableSet(new HashSet<Integer>(_snakes.keySet()));
 	}
 
 	@Override

@@ -91,7 +91,8 @@ public abstract class Engine extends Thread {
 				
 				// Do the logic for each object.
 				GameObject object;
-				for(int key : _stage.getGameObjectIds()) {
+				Set<Integer> ids = _stage.getGameObjectIds();
+				for(int key : ids) {
 					try {
 						object = _stage.getGameObject(key);
 						
