@@ -113,10 +113,20 @@ public abstract class Engine extends Thread {
 				// Do the logic for each foreign snake.
 				
 				
-				snake.moveTo(
-					(snake.getSegmentX(0)+dx+_stage.getMap().getWidth())%_stage.getMap().getWidth(),
-					(snake.getSegmentY(0)+dy+_stage.getMap().getHeight())%_stage.getMap().getHeight()
-				);
+				
+				// Check for walls
+				if(_stage.getMap().isWall(snake.getSegmentX(0)+dx, snake.getSegmentY(0)+dy)) {
+					// Death of the snake, we hit a wall!
+					
+					// TODO make the death of the snake.
+					
+					// In the meantime, we will just freeze.
+				} else {
+					snake.moveTo(
+						(snake.getSegmentX(0)+dx+_stage.getMap().getWidth())%_stage.getMap().getWidth(),
+						(snake.getSegmentY(0)+dy+_stage.getMap().getHeight())%_stage.getMap().getHeight()
+					);
+				}
 			}
 			
 			// wait for the remaining time, until the next tick.

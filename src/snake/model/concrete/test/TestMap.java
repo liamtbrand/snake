@@ -29,6 +29,11 @@ public class TestMap implements Map {
 
 	@Override
 	public boolean isWall(int x, int y) {
+		
+		if(x < 0 || y < 0 || x >= 20 || y >= 10) {
+			return false;
+		}
+		
 		if(data[y][x] == 1) {
 			return true;
 		}else {
