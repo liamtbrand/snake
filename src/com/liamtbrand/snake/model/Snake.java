@@ -1,4 +1,4 @@
-package snake.model;
+package com.liamtbrand.snake.model;
 
 /**
  * This interface controls the interaction with a snake's data model.

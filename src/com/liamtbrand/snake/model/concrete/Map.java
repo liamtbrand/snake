@@ -1,11 +1,11 @@
-package snake.model.concrete;
+package com.liamtbrand.snake.model.concrete;
 
 /**
  * 
  * @author liamtbrand
  *
  */
-public class Map implements snake.model.Map {
+public class Map implements com.liamtbrand.snake.model.Map {
 	
 	private int[] _data;
 	private int _width;

@@ -1,4 +1,4 @@
-package snake.model;
+package com.liamtbrand.snake.model;
 
 /**
  * Game objects can be placed on the stage.

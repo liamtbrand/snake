@@ -1,6 +1,6 @@
-package snake.game;
+package com.liamtbrand.snake.game;
 
-import snake.model.concrete.Snake;
+import com.liamtbrand.snake.model.concrete.Snake;
 
 public class TestSnake extends Snake {
 

@@ -1,4 +1,4 @@
-package snake.engine;
+package com.liamtbrand.snake.engine;
 
 /**
  * This is a base object of the game.

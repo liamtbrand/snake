@@ -1,4 +1,4 @@
-package snake.model;
+package com.liamtbrand.snake.model;
 
 /**
  * The map interface allows for interaction with the map.

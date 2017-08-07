@@ -1,4 +1,4 @@
-package snake.game;
+package com.liamtbrand.snake.game;
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -10,12 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
-import snake.model.Snake;
-import snake.model.Snake.Direction;
-import snake.model.Stage.InvalidIdException;
-import snake.model.concrete.GameObject;
-import snake.model.concrete.test.TestMap;
-import snake.view.BlockRenderEngine;
+import com.liamtbrand.snake.model.Snake;
+import com.liamtbrand.snake.model.Snake.Direction;
+import com.liamtbrand.snake.model.Stage.InvalidIdException;
+import com.liamtbrand.snake.model.concrete.GameObject;
+import com.liamtbrand.snake.model.concrete.test.TestMap;
+import com.liamtbrand.snake.view.BlockRenderEngine;
 
 public class SinglePlayerGame {
 

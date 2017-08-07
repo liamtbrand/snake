@@ -1,6 +1,6 @@
-package snake.model.concrete;
+package com.liamtbrand.snake.model.concrete;
 
-public class GameObject implements snake.model.GameObject {
+public class GameObject implements com.liamtbrand.snake.model.GameObject {
 
 	private int _x;
 	private int _y;

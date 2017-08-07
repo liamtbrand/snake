@@ -1,15 +1,15 @@
-package snake.model.concrete;
+package com.liamtbrand.snake.model.concrete;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import snake.model.GameObject;
-import snake.model.Map;
-import snake.model.Snake;
+import com.liamtbrand.snake.model.GameObject;
+import com.liamtbrand.snake.model.Map;
+import com.liamtbrand.snake.model.Snake;
 
-public class Stage implements snake.model.Stage {
+public class Stage implements com.liamtbrand.snake.model.Stage {
 
 	private volatile Map _map;
 	private volatile java.util.Map<Integer,GameObject> _objects;

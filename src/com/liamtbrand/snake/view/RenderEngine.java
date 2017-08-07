@@ -1,6 +1,6 @@
-package snake.view;
+package com.liamtbrand.snake.view;
 
-import snake.model.Stage;
+import com.liamtbrand.snake.model.Stage;
 
 public abstract class RenderEngine {
 	

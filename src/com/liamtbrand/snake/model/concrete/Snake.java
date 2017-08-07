@@ -1,9 +1,9 @@
-package snake.model.concrete;
+package com.liamtbrand.snake.model.concrete;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Snake implements snake.model.Snake {
+public class Snake implements com.liamtbrand.snake.model.Snake {
 	
 	public class SnakeSegment {
 		private int x;

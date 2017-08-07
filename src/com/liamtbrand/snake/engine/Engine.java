@@ -1,17 +1,17 @@
-package snake.engine;
+package com.liamtbrand.snake.engine;
 
 import java.util.Iterator;
 import java.util.Set;
 
-import snake.model.GameObject;
-import snake.model.Map;
-import snake.model.Snake;
-import snake.model.Stage.InvalidIdException;
-import snake.model.concrete.Stage;
+import com.liamtbrand.snake.model.GameObject;
+import com.liamtbrand.snake.model.Map;
+import com.liamtbrand.snake.model.Snake;
+import com.liamtbrand.snake.model.Stage.InvalidIdException;
+import com.liamtbrand.snake.model.concrete.Stage;
 
 public abstract class Engine extends Thread {
 
-	private snake.model.Stage _stage;
+	private com.liamtbrand.snake.model.Stage _stage;
 	
 	private volatile boolean _running;
 	
@@ -150,7 +150,7 @@ public abstract class Engine extends Thread {
 		return null;
 	}
 	
-	public snake.model.Stage getStage() {
+	public com.liamtbrand.snake.model.Stage getStage() {
 		return _stage;
 	}
 	

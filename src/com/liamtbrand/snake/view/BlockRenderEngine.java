@@ -1,11 +1,11 @@
-package snake.view;
+package com.liamtbrand.snake.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Iterator;
 
-import snake.model.GameObject;
-import snake.model.Snake;
+import com.liamtbrand.snake.model.GameObject;
+import com.liamtbrand.snake.model.Snake;
 
 public class BlockRenderEngine extends RenderEngine {
 

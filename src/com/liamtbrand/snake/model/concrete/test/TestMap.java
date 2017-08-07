@@ -1,6 +1,6 @@
-package snake.model.concrete.test;
+package com.liamtbrand.snake.model.concrete.test;
 
-import snake.model.Map;
+import com.liamtbrand.snake.model.Map;
 
 public class TestMap implements Map {
 	
