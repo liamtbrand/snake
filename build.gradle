@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+mainClassName = "com.liamtbrand.snake.game.SinglePlayerGame"
+
+sourceSets {
+	main.java.srcDirs = ['src']
+}
