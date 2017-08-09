@@ -9,7 +9,7 @@ package com.liamtbrand.snake.model;
  * @author liamtbrand
  *
  */
-public interface Map {
+public interface IMapModel {
 
 	public int getWidth();
 	public int getHeight();

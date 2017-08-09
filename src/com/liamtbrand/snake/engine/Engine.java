@@ -3,23 +3,24 @@ package com.liamtbrand.snake.engine;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.liamtbrand.snake.model.GameObject;
-import com.liamtbrand.snake.model.Map;
-import com.liamtbrand.snake.model.Snake;
-import com.liamtbrand.snake.model.Stage.InvalidIdException;
+import com.liamtbrand.snake.controller.AbstractGameObject;
+import com.liamtbrand.snake.controller.AbstractSnake;
+import com.liamtbrand.snake.controller.IStage;
+import com.liamtbrand.snake.model.IMapModel;
+import com.liamtbrand.snake.model.ISnakeModel;
 import com.liamtbrand.snake.model.concrete.Stage;
 
 public abstract class Engine extends Thread {
 
-	private com.liamtbrand.snake.model.Stage _stage;
+	public IStage stage;
 	
-	private volatile boolean _running;
+	private volatile boolean running;
 	
-	private long _tickTime = 200;
-	private long _lastTick = 0;
+	private long tickTime = 200;
+	private long lastTick = 0;
 	
 	public Engine() {
-		_running = false;
+		running = false;
 	}
 	
 	/**
@@ -36,9 +37,9 @@ public abstract class Engine extends Thread {
 	 * @param map
 	 * @throws Exception
 	 */
-	public void selectMap(Map map) throws Exception {
-		if(!_running) {
-			_stage = new Stage(map);
+	public void selectMap(IMapModel map) throws Exception {
+		if(!running) {
+			stage = new Stage(map);
 		}else {
 			throw new Exception("Can't select a map while the engine is running!");
 		}
@@ -49,29 +50,30 @@ public abstract class Engine extends Thread {
 	 * @param tick
 	 */
 	public void setEngineTickTime(long tick) {
-		_tickTime = tick;
+		tickTime = tick;
 	}
 	
 	public synchronized void run() {
 		
-		_running = true;
-		_lastTick = time();
+		running = true;
+		lastTick = time();
 		long elapsed = 0;
 		
-		while(_running) {
+		while(running) {
 			
 			// GAME LOGIC TODO
 			
-			// For each snake on the map, do the logic for this snake.
-			Iterator<Snake> snakes = _stage.getSnakeIterator();
-			Snake snake;
+			// For each snake on the stage, do the logic for this snake.
+			Iterator<AbstractSnake> snakes = stage.getSnakeIterator();
+			AbstractSnake snake;
 			int dx, dy;
+			int headx, heady;
 			while(snakes.hasNext()) {
 				snake = snakes.next();
-				
 				dx = 0;
 				dy = 0;
-				switch(snake.getDirection()) {
+				
+				switch(snake.model.getDirection()) {
 					case NORTH:
 						dy = -1;
 						break;
@@ -89,53 +91,48 @@ public abstract class Engine extends Thread {
 						break;
 				}
 				
+				headx = snake.model.getSegmentX(0)+dx;
+				heady = snake.model.getSegmentY(0)+dy;
+				
 				// Do the logic for each object.
-				GameObject object;
-				Set<Integer> ids = _stage.getGameObjectIds();
-				for(int key : ids) {
-					try {
-						object = _stage.getGameObject(key);
-						
-						if(	object.getX() == snake.getSegmentX(0) + dx &&
-							object.getY() == snake.getSegmentY(0) + dy
-						) {
-							if(object.getType() == GameObject.Type.FOOD) {
-								_stage.removeGameObject(key);
-								snake.grow();
-							}
-						}
-						
-					} catch (InvalidIdException e) {
-						e.printStackTrace();
-					}
+				Set<AbstractGameObject> objects = stage.getGameObjectsAt(headx, heady);
+				for(AbstractGameObject object : objects) {
+					snake.eat(object);
 				}
 				
 				// Do the logic for each foreign snake.
-				
-				
+				Set<AbstractSnake> otherSnakes = stage.getSnakesAt(headx, heady);
+				if(otherSnakes.size() > 0) {
+					snake.die(); // We crashed, so die.
+					continue;
+				}
 				
 				// Check for walls
-				if(_stage.getMap().isWall(snake.getSegmentX(0)+dx, snake.getSegmentY(0)+dy)) {
+				if(stage.getMap().isWall(headx, heady)) {
 					// Death of the snake, we hit a wall!
 					
 					// TODO make the death of the snake.
+					snake.die();
+					continue;
 					
 					// In the meantime, we will just freeze.
 				} else {
-					snake.moveTo(
-						(snake.getSegmentX(0)+dx+_stage.getMap().getWidth())%_stage.getMap().getWidth(),
-						(snake.getSegmentY(0)+dy+_stage.getMap().getHeight())%_stage.getMap().getHeight()
+					snake.model.moveTo(
+						(headx+stage.getMap().getWidth())%stage.getMap().getWidth(),
+						(heady+stage.getMap().getHeight())%stage.getMap().getHeight()
 					);
 				}
+				
 			}
+			
 			
 			// wait for the remaining time, until the next tick.
 			try {
-				elapsed = time() - _lastTick;
-				if(elapsed < _tickTime) {
-					wait(_tickTime - elapsed);
+				elapsed = time() - lastTick;
+				if(elapsed < tickTime) {
+					wait(tickTime - elapsed);
 				}
-				_lastTick = time();
+				lastTick = time();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} 
@@ -143,15 +140,11 @@ public abstract class Engine extends Thread {
 	}
 	
 	public void halt() {
-		_running = false;
+		running = false;
 	}
 	
-	public Snake spawnSnake() {
+	public ISnakeModel spawnSnake() {
 		return null;
-	}
-	
-	public com.liamtbrand.snake.model.Stage getStage() {
-		return _stage;
 	}
 	
 	public abstract void registerControls(Controls ctrls);

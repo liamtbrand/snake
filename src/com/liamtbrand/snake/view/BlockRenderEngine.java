@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Iterator;
 
-import com.liamtbrand.snake.model.GameObject;
-import com.liamtbrand.snake.model.Snake;
+import com.liamtbrand.snake.controller.AbstractGameObject;
+import com.liamtbrand.snake.controller.AbstractSnake;
 
 public class BlockRenderEngine extends RenderEngine {
 
@@ -15,9 +15,9 @@ public class BlockRenderEngine extends RenderEngine {
 	}
 	
 	private void renderMap(Graphics g) {
-		for(int x = 0; x < _stage.getMap().getWidth(); x++) {
-			for(int y = 0; y < _stage.getMap().getHeight(); y++) {
-				if(_stage.getMap().isWall(x, y)) {
+		for(int x = 0; x < stage.getMap().getWidth(); x++) {
+			for(int y = 0; y < stage.getMap().getHeight(); y++) {
+				if(stage.getMap().isWall(x, y)) {
 					g.fillRect(x*10, y*10, 10, 10);
 				}
 			}
@@ -25,30 +25,29 @@ public class BlockRenderEngine extends RenderEngine {
 	}
 	
 	private void renderGameObjects(Graphics g) {
-		Iterator<GameObject> objects = _stage.getGameObjectIterator();
-		GameObject object;
+		Iterator<AbstractGameObject> objects = stage.getGameObjectIterator();
+		AbstractGameObject object;
 		while(objects.hasNext()) {
 			object = objects.next();
 			
 			g.setColor(new Color(0.5f,0.8f,0.5f));
-			g.fillRect(object.getX()*10, object.getY()*10, 10, 10);
+			g.fillRect(object.model.getX()*10, object.model.getY()*10, 10, 10);
 			g.setColor(new Color(0.0f,0.0f,0.0f));
 		}
 	}
 	
 	private void renderSnakes(Graphics g) {
-		Iterator<Snake> snakes = _stage.getSnakeIterator();
-		Snake snake;
-		int snakeLength;
+		Iterator<AbstractSnake> snakes = stage.getSnakeIterator();
+		AbstractSnake snake;
 		while(snakes.hasNext()) {
 			snake = snakes.next();
 			
-			g.setColor(new Color(0.8f,0.5f,0.5f));
-			g.fillRect(snake.getSegmentX(0)*10, snake.getSegmentY(0)*10, 10, 10);
 			g.setColor(new Color(0.5f,0.5f,0.8f));
-			for(int i = 1; i < snake.getLength(); i++) {
-				g.fillRect(snake.getSegmentX(i)*10, snake.getSegmentY(i)*10, 10, 10);
+			for(int i = 1; i < snake.model.getLength(); i++) {
+				g.fillRect(snake.model.getSegmentX(i)*10, snake.model.getSegmentY(i)*10, 10, 10);
 			}
+			g.setColor(new Color(0.8f,0.5f,0.5f));
+			g.fillRect(snake.model.getSegmentX(0)*10, snake.model.getSegmentY(0)*10, 10, 10);
 		}
 		g.setColor(new Color(0.0f,0.0f,0.0f));
 	}

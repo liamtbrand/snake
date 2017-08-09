@@ -1,13 +1,15 @@
 package com.liamtbrand.snake.model.concrete;
 
-public class GameObject implements com.liamtbrand.snake.model.GameObject {
+import com.liamtbrand.snake.model.IGameObjectModel;
+
+public class BasicGameObjectModel implements IGameObjectModel {
 
 	private int _x;
 	private int _y;
 	
 	private Type _t;
 	
-	public GameObject(int x, int y, Type t) {
+	public BasicGameObjectModel(int x, int y, Type t) {
 		_x = x;
 		_y = y;
 		_t = t;

@@ -5,7 +5,7 @@ package com.liamtbrand.snake.model;
  * @author liamtbrand
  *
  */
-public interface Snake {
+public interface ISnakeModel {
 	
 	public static enum Direction {
 		NORTH, SOUTH, EAST, WEST

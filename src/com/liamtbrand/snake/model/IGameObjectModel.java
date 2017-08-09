@@ -7,7 +7,7 @@ package com.liamtbrand.snake.model;
  * @author liamtbrand
  *
  */
-public interface GameObject {
+public interface IGameObjectModel {
 	
 	public static enum Type {
 		FOOD

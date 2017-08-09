@@ -1,17 +1,16 @@
 package com.liamtbrand.snake.view;
 
-import com.liamtbrand.snake.model.Stage;
-
+import com.liamtbrand.snake.controller.IStage;
 public abstract class RenderEngine {
 	
-	protected Stage _stage;
+	protected IStage stage;
 	
 	public RenderEngine() {
 		
 	}
 	
-	public void observeStage(Stage stage) {
-		_stage = stage;
+	public void observeStage(IStage stage) {
+		this.stage = stage;
 	}
 	
 	public abstract void renderStage();

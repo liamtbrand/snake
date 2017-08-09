@@ -1,31 +1,31 @@
 package com.liamtbrand.snake.model.concrete;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.liamtbrand.snake.model.GameObject;
-import com.liamtbrand.snake.model.Map;
-import com.liamtbrand.snake.model.Snake;
+import com.liamtbrand.snake.controller.AbstractGameObject;
+import com.liamtbrand.snake.controller.AbstractSnake;
+import com.liamtbrand.snake.controller.IStage;
+import com.liamtbrand.snake.model.IMapModel;
 
-public class Stage implements com.liamtbrand.snake.model.Stage {
+public class Stage implements IStage {
 
-	private volatile Map _map;
-	private volatile java.util.Map<Integer,GameObject> _objects;
-	private volatile java.util.Map<Integer,Snake> _snakes;
+	private volatile IMapModel map;
+	private volatile Set<AbstractGameObject> objects;
+	private volatile Set<AbstractSnake> snakes;
 	
-	public Stage(Map map) {
+	public Stage(IMapModel map) {
 		clearStage();
-		_map = map;
+		this.map = map;
 	}
 
 	/**
 	 * Used to prevent map drawing calls from calling an empty object.
 	 * @return
 	 */
-	private Map getEmptyMap() {
-		return new Map() {
+	private IMapModel getEmptyMap() {
+		return new IMapModel() {
 
 			@Override
 			public int getWidth() {
@@ -47,93 +47,79 @@ public class Stage implements com.liamtbrand.snake.model.Stage {
 	
 	@Override
 	public void clearStage() {
-		_map = getEmptyMap();
-		_objects = new java.util.HashMap<Integer,GameObject>();
-		_snakes = new java.util.HashMap<Integer,Snake>();
+		map = getEmptyMap();
+		objects = new HashSet<AbstractGameObject>();
+		snakes = new HashSet<AbstractSnake>();
 	}
 
 	@Override
-	public void addGameObject(int id, GameObject go) throws InvalidIdException {
-		if(!_objects.containsKey(id)) {
-			_objects.put(id, go);
-		} else {
-			throw new InvalidIdException();
+	public void addGameObject(AbstractGameObject go) {
+		if(!objects.contains(go)) {
+			objects.add(go);
 		}
 	}
 
 	@Override
-	public GameObject getGameObject(int id) throws InvalidIdException {
-		if(_objects.containsKey(id)) {
-			return _objects.get(id);
-		} else {
-			throw new InvalidIdException();
+	public void removeGameObject(AbstractGameObject go) {
+		if(objects.contains(go)) {
+			objects.remove(go);
 		}
 	}
 
 	@Override
-	public void removeGameObject(int id) throws InvalidIdException {
-		if(_objects.containsKey(id)) {
-			_objects.remove(id);
-		} else {
-			throw new InvalidIdException();
+	public Set<AbstractGameObject> getGameObjectsAt(int x, int y) {
+		Set<AbstractGameObject> obs = new HashSet<AbstractGameObject>();
+		for(AbstractGameObject object : objects) {
+			if(object.model.getX() == x && object.model.getY() == y) {
+				obs.add(object);
+			}
 		}
+		return obs;
+	}
+
+	@Override
+	public Iterator<AbstractGameObject> getGameObjectIterator() {
+		return objects.iterator();
+	}
+
+	@Override
+	public void addSnake(AbstractSnake snake) {
+		if(!snakes.contains(snake)) {
+			snakes.add(snake);
+		}
+	}
+
+	@Override
+	public void removeSnake(AbstractSnake snake) {
+		if(snakes.contains(snake)) {
+			snakes.remove(snake);
+		}
+	}
+
+	@Override
+	public Set<AbstractSnake> getSnakesAt(int x, int y) {
+		Set<AbstractSnake> snks = new HashSet<AbstractSnake>();
+		for(AbstractSnake snk : snakes) {
+			if(snk.model.getSegmentX(0) == x && snk.model.getSegmentY(0) == y) {
+				snks.add(snk);
+			}
+		}
+		return snks;
 	}
 	
 	@Override
-	public Iterator<GameObject> getGameObjectIterator() {
-		return Collections.unmodifiableCollection(_objects.values()).iterator();
-	}
-
-	@Override
-	public synchronized Set<Integer> getGameObjectIds() {
-		return Collections.unmodifiableSet(new HashSet<Integer>(_objects.keySet()));
-	}
-
-	@Override
-	public void addSnake(int id, Snake snake) throws InvalidIdException {
-		if(!_snakes.containsKey(id)) {
-			_snakes.put(id,snake);
-		} else {
-			throw new InvalidIdException();
-		}
-	}
-
-	@Override
-	public Snake getSnake(int id) throws InvalidIdException {
-		if(_snakes.containsKey(id)) {
-			return _snakes.get(id);
-		} else {
-			throw new InvalidIdException();
-		}
-	}
-
-	@Override
-	public void removeSnake(int id) throws InvalidIdException {
-		if(_snakes.containsKey(id)) {
-			_snakes.remove(id);
-		} else {
-			throw new InvalidIdException();
-		}
-	}
-
-	@Override
-	public Iterator<Snake> getSnakeIterator() {
-		return Collections.unmodifiableCollection(_snakes.values()).iterator();
+	public Iterator<AbstractSnake> getSnakeIterator() {
+		return snakes.iterator();
 	}
 	
 	@Override
-	public synchronized Set<Integer> getSnakeIds() {
-		return Collections.unmodifiableSet(new HashSet<Integer>(_snakes.keySet()));
+	public void setMap(IMapModel map) {
+		this.map = map;
 	}
-
+	
 	@Override
-	public void setMap(Map map) {
-		_map = map;
-	}
-
-	@Override
-	public Map getMap() {
-		return _map; // TODO make unmodifiable?
+	public IMapModel getMap() {
+		return map; // TODO make unmodifiable?
 	}
 	
 }

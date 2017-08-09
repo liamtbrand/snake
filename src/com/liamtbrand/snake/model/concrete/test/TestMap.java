@@ -1,8 +1,8 @@
 package com.liamtbrand.snake.model.concrete.test;
 
-import com.liamtbrand.snake.model.Map;
+import com.liamtbrand.snake.model.IMapModel;
 
-public class TestMap implements Map {
+public class TestMap implements IMapModel {
 	
 	private int data[][] = new int[][] {
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},

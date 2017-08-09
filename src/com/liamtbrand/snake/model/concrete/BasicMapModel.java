@@ -1,11 +1,13 @@
 package com.liamtbrand.snake.model.concrete;
 
+import com.liamtbrand.snake.model.IMapModel;
+
 /**
  * 
  * @author liamtbrand
  *
  */
-public class Map implements com.liamtbrand.snake.model.Map {
+public class BasicMapModel implements IMapModel {
 	
 	private int[] _data;
 	private int _width;

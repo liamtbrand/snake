@@ -3,7 +3,7 @@ package com.liamtbrand.snake.model.concrete;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Snake implements com.liamtbrand.snake.model.Snake {
+public class BasicSnakeModel implements com.liamtbrand.snake.model.ISnakeModel {
 	
 	public class SnakeSegment {
 		private int x;
@@ -21,7 +21,7 @@ public class Snake implements com.liamtbrand.snake.model.Snake {
 	
 	// TODO refine this more.
 	
-	public Snake(int x, int y, Direction direction,int length) {
+	public BasicSnakeModel(int x, int y, Direction direction,int length) {
 		_x = x;
 		_y = y;
 		_segments = new ArrayList<SnakeSegment>();
