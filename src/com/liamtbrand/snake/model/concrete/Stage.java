@@ -100,7 +100,7 @@ public class Stage implements IStage {
 	public Set<AbstractSnake> getSnakesAt(int x, int y) {
 		Set<AbstractSnake> snks = new HashSet<AbstractSnake>();
 		for(AbstractSnake snk : snakes) {
-			if(snk.model.getSegmentX(0) == x && snk.model.getSegmentY(0) == y) {
+			if(snk.model.isAt(x, y)) {
 				snks.add(snk);
 			}
 		}
