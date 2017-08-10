@@ -19,6 +19,7 @@ import com.liamtbrand.snake.controller.concrete.FoodObject;
 import com.liamtbrand.snake.controller.concrete.Snake;
 import com.liamtbrand.snake.controller.concrete.WormholeExitObject;
 import com.liamtbrand.snake.controller.concrete.WormholeObject;
+import com.liamtbrand.snake.engine.EngineTicker;
 import com.liamtbrand.snake.model.IGameObjectModel;
 import com.liamtbrand.snake.model.concrete.BasicGameObjectModel;
 import com.liamtbrand.snake.model.concrete.BasicSnakeModel;
@@ -109,7 +110,8 @@ public class SinglePlayerGame {
 		frame.setVisible(true);
 		
 		// Start the engine.
-		engine.start();
+		EngineTicker engineTicker = new EngineTicker(engine,200);
+		engineTicker.start();
 		
 		// Start the render engine to render the stage to the screen.
 		new Timer(60, e -> pane.repaint()).start();
