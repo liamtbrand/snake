@@ -10,6 +10,4 @@ public class Engine extends com.liamtbrand.snake.engine.Engine {
 		
 	}
 
-	
-
 }

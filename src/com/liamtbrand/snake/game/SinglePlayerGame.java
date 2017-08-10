@@ -18,6 +18,7 @@ import com.liamtbrand.snake.controller.concrete.WormholeExitObject;
 import com.liamtbrand.snake.controller.concrete.WormholeObject;
 import com.liamtbrand.snake.model.IGameObjectModel;
 import com.liamtbrand.snake.model.concrete.BasicGameObjectModel;
+import com.liamtbrand.snake.model.concrete.BasicSnakeModel;
 import com.liamtbrand.snake.model.concrete.test.TestMap;
 import com.liamtbrand.snake.view.BlockRenderEngine;
 
@@ -38,7 +39,7 @@ public class SinglePlayerGame {
 		BlockRenderEngine rEngine = new BlockRenderEngine(20);
 		rEngine.observeStage(engine.stage);
 		
-		AbstractSnake snake = new Snake(new TestSnake());
+		AbstractSnake snake = new Snake(new BasicSnakeModel(2, 4, Direction.EAST, 5));
 		
 		// Setup some example snake and food.
 		engine.stage.addSnake(snake);

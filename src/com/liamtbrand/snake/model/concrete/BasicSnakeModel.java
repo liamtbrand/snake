@@ -3,7 +3,9 @@ package com.liamtbrand.snake.model.concrete;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasicSnakeModel implements com.liamtbrand.snake.model.ISnakeModel {
+import com.liamtbrand.snake.model.ISnakeModel;
+
+public class BasicSnakeModel implements ISnakeModel {
 	
 	public class SnakeSegment {
 		private int x;
