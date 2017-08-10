@@ -2,12 +2,15 @@ package com.liamtbrand.snake.game;
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
 import com.liamtbrand.snake.model.ISnakeModel.Direction;
@@ -58,6 +61,17 @@ public class SinglePlayerGame {
 			}
 		};
 		
+		pane.addComponentListener(new ComponentListener() {
+			@Override
+			public void componentResized(ComponentEvent paramComponentEvent) {
+				rEngine.calculateScale(pane.getSize());
+			}
+
+			@Override public void componentMoved(ComponentEvent paramComponentEvent) {}
+			@Override public void componentShown(ComponentEvent paramComponentEvent) {}
+			@Override public void componentHidden(ComponentEvent paramComponentEvent) {}
+		});
+		
 		// Setup the input controls for the player 1 snake.
 		pane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0), "p1");
 		pane.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0), "p1");
@@ -98,22 +112,7 @@ public class SinglePlayerGame {
 		engine.start();
 		
 		// Start the render engine to render the stage to the screen.
-		(new Thread() {
-			
-			public synchronized void run(){
-				while(true) {
-					try {
-						this.wait(1000/60);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					pane.repaint();
-				}
-				
-			}
-			
-		}).start();
+		new Timer(60, e -> pane.repaint()).start();
 		
 	}
 
