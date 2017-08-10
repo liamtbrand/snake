@@ -8,7 +8,29 @@ package com.liamtbrand.snake.model;
 public interface ISnakeModel {
 	
 	public static enum Direction {
-		NORTH, SOUTH, EAST, WEST
+		NORTH, SOUTH, EAST, WEST;
+		
+		public int dx() {
+			switch(this) {
+				case EAST:
+					return 1;
+				case WEST:
+					return -1;
+				default:
+					return 0;
+			}
+		}
+		
+		public int dy() {
+			switch(this) {
+				case NORTH:
+					return -1;
+				case SOUTH:
+					return 1;
+				default:
+					return 0;
+			}
+		}
 	}
 
 	/**

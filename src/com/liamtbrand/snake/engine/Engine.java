@@ -46,26 +46,8 @@ public abstract class Engine {
 		while(snakes.hasNext()) {
 			snake = snakes.next();
 			
-			dx = 0;
-			dy = 0;
-			
-			switch(snake.model.getDirection()) {
-				case NORTH:
-					dy = -1;
-					break;
-				case SOUTH:
-					dy = 1;
-					break;
-				case EAST:
-					dx = 1;
-					break;
-				case WEST:
-					dx = -1;
-					break;
-				default:
-					System.out.println("Impossible?");
-					break;
-			}
+			dx = snake.model.getDirection().dx();
+			dy = snake.model.getDirection().dy();
 			
 			headx = snake.model.getSegmentX(0)+dx;
 			heady = snake.model.getSegmentY(0)+dy;
