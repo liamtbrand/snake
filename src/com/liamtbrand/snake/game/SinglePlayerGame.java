@@ -12,8 +12,10 @@ import javax.swing.WindowConstants;
 
 import com.liamtbrand.snake.model.ISnakeModel.Direction;
 import com.liamtbrand.snake.controller.AbstractSnake;
-import com.liamtbrand.snake.controller.concrete.GameObject;
+import com.liamtbrand.snake.controller.concrete.FoodObject;
 import com.liamtbrand.snake.controller.concrete.Snake;
+import com.liamtbrand.snake.controller.concrete.WormholeExitObject;
+import com.liamtbrand.snake.controller.concrete.WormholeObject;
 import com.liamtbrand.snake.model.IGameObjectModel;
 import com.liamtbrand.snake.model.concrete.BasicGameObjectModel;
 import com.liamtbrand.snake.model.concrete.test.TestMap;
@@ -33,15 +35,17 @@ public class SinglePlayerGame {
 		}
 		
 		// Setup the render engine to render using the block render engine.
-		BlockRenderEngine rEngine = new BlockRenderEngine();
+		BlockRenderEngine rEngine = new BlockRenderEngine(20);
 		rEngine.observeStage(engine.stage);
 		
 		AbstractSnake snake = new Snake(new TestSnake());
 		
 		// Setup some example snake and food.
 		engine.stage.addSnake(snake);
-		engine.stage.addGameObject(new GameObject(new BasicGameObjectModel(1,4,IGameObjectModel.Type.FOOD)));
-		engine.stage.addGameObject(new GameObject(new BasicGameObjectModel(5,6,IGameObjectModel.Type.FOOD)));
+		engine.stage.addGameObject(new FoodObject(new BasicGameObjectModel(1,4,IGameObjectModel.Type.FOOD)));
+		engine.stage.addGameObject(new FoodObject(new BasicGameObjectModel(5,6,IGameObjectModel.Type.FOOD)));
+		engine.stage.addGameObject(new WormholeObject(new BasicGameObjectModel(10,1,IGameObjectModel.Type.WORMHOLE), 12, 14));
+		engine.stage.addGameObject(new WormholeExitObject(new BasicGameObjectModel(12,14,IGameObjectModel.Type.WORMHOLE)));
 		
 		JFrame frame = new JFrame();
 		
@@ -86,7 +90,7 @@ public class SinglePlayerGame {
 		// Setup the frame.
 		frame.add(pane);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setSize(200, 122);
+		frame.setSize(400, 422);
 		frame.setVisible(true);
 		
 		// Start the engine.

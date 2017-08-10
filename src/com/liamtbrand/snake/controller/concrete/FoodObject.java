@@ -1,12 +1,18 @@
 package com.liamtbrand.snake.controller.concrete;
 
+import com.liamtbrand.snake.controller.AbstractGameObject;
 import com.liamtbrand.snake.model.IGameObjectModel;
 
-public class FoodObject extends GameObject {
+public class FoodObject extends AbstractGameObject {
 
 	public FoodObject(IGameObjectModel model) {
 		super(model);
-		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void onEat() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

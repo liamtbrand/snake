@@ -24,6 +24,6 @@ public abstract class AbstractGameObject {
 	/**
 	 * Object specific behaviour.
 	 */
-	public void onEat() { /* Default do nothing. */ };
+	public abstract void onEat();
 	
 }

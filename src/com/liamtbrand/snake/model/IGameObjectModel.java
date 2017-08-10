@@ -10,7 +10,7 @@ package com.liamtbrand.snake.model;
 public interface IGameObjectModel {
 	
 	public static enum Type {
-		FOOD
+		FOOD, WORMHOLE
 	}
 	
 	public int getX();

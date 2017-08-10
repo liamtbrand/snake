@@ -3,10 +3,15 @@ package com.liamtbrand.snake.controller.concrete;
 import com.liamtbrand.snake.controller.AbstractGameObject;
 import com.liamtbrand.snake.model.IGameObjectModel;
 
-public class GameObject extends AbstractGameObject {
+public class WormholeExitObject extends AbstractGameObject {
 
-	public GameObject(IGameObjectModel model) {
+	public WormholeExitObject(IGameObjectModel model) {
 		super(model);
 	}
-	
+
+	@Override
+	public void onEat() {
+		eaten = false;
+	}
+
 }

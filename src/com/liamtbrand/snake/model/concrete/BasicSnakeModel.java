@@ -25,6 +25,7 @@ public class BasicSnakeModel implements com.liamtbrand.snake.model.ISnakeModel {
 		_x = x;
 		_y = y;
 		_segments = new ArrayList<SnakeSegment>();
+		_segments.add(new SnakeSegment(_x,_y));
 		for(int i = 0; i < length; i++) {
 			grow();
 		}
@@ -54,7 +55,7 @@ public class BasicSnakeModel implements com.liamtbrand.snake.model.ISnakeModel {
 	
 	@Override
 	public void grow() {
-		_segments.add(new SnakeSegment(_x,_y));
+		_segments.add(new SnakeSegment(_segments.get(0).x,_segments.get(0).y));
 	}
 
 	@Override

@@ -6,8 +6,15 @@ import java.util.Iterator;
 
 import com.liamtbrand.snake.controller.AbstractGameObject;
 import com.liamtbrand.snake.controller.AbstractSnake;
+import com.liamtbrand.snake.model.IGameObjectModel.Type;
 
 public class BlockRenderEngine extends RenderEngine {
+	
+	private int scale = 10; // default scale
+	
+	public BlockRenderEngine(int scale) {
+		this.scale = scale;
+	}
 
 	@Override
 	public void renderStage() {
@@ -18,7 +25,7 @@ public class BlockRenderEngine extends RenderEngine {
 		for(int x = 0; x < stage.getMap().getWidth(); x++) {
 			for(int y = 0; y < stage.getMap().getHeight(); y++) {
 				if(stage.getMap().isWall(x, y)) {
-					g.fillRect(x*10, y*10, 10, 10);
+					g.fillRect(x*scale, y*scale, scale, scale);
 				}
 			}
 		}
@@ -30,8 +37,13 @@ public class BlockRenderEngine extends RenderEngine {
 		while(objects.hasNext()) {
 			object = objects.next();
 			
-			g.setColor(new Color(0.5f,0.8f,0.5f));
-			g.fillRect(object.model.getX()*10, object.model.getY()*10, 10, 10);
+			if(object.model.getType() == Type.FOOD) {
+				g.setColor(new Color(0.5f,0.8f,0.5f));
+			}
+			if(object.model.getType() == Type.WORMHOLE) {
+				g.setColor(new Color(0.8f,0.8f,1.0f));
+			}
+			g.fillRect(object.model.getX()*scale, object.model.getY()*scale, scale, scale);
 			g.setColor(new Color(0.0f,0.0f,0.0f));
 		}
 	}
@@ -44,10 +56,10 @@ public class BlockRenderEngine extends RenderEngine {
 			
 			g.setColor(new Color(0.5f,0.5f,0.8f));
 			for(int i = 1; i < snake.model.getLength(); i++) {
-				g.fillRect(snake.model.getSegmentX(i)*10, snake.model.getSegmentY(i)*10, 10, 10);
+				g.fillRect(snake.model.getSegmentX(i)*scale, snake.model.getSegmentY(i)*scale, scale, scale);
 			}
 			g.setColor(new Color(0.8f,0.5f,0.5f));
-			g.fillRect(snake.model.getSegmentX(0)*10, snake.model.getSegmentY(0)*10, 10, 10);
+			g.fillRect(snake.model.getSegmentX(0)*scale, snake.model.getSegmentY(0)*scale, scale, scale);
 		}
 		g.setColor(new Color(0.0f,0.0f,0.0f));
 	}

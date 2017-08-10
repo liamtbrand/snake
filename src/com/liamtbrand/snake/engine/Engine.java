@@ -70,6 +70,7 @@ public abstract class Engine extends Thread {
 			int headx, heady;
 			while(snakes.hasNext()) {
 				snake = snakes.next();
+				
 				dx = 0;
 				dy = 0;
 				
@@ -94,28 +95,19 @@ public abstract class Engine extends Thread {
 				headx = snake.model.getSegmentX(0)+dx;
 				heady = snake.model.getSegmentY(0)+dy;
 				
-				// Do the logic for each object.
-				Set<AbstractGameObject> objects = stage.getGameObjectsAt(headx, heady);
-				for(AbstractGameObject object : objects) {
-					snake.eat(object);
-				}
-				
 				// Do the logic for each foreign snake.
 				Set<AbstractSnake> otherSnakes = stage.getSnakesAt(headx, heady);
 				if(otherSnakes.size() > 0) {
 					snake.die(); // We crashed, so die.
+					System.out.println("snake -> die");
 					continue;
 				}
 				
 				// Check for walls
 				if(stage.getMap().isWall(headx, heady)) {
-					// Death of the snake, we hit a wall!
-					
-					// TODO make the death of the snake.
-					snake.die();
+					snake.die(); // Death of the snake, we hit a wall!
+					System.out.println("wall -> die");
 					continue;
-					
-					// In the meantime, we will just freeze.
 				} else {
 					snake.model.moveTo(
 						(headx+stage.getMap().getWidth())%stage.getMap().getWidth(),
@@ -123,8 +115,14 @@ public abstract class Engine extends Thread {
 					);
 				}
 				
+				// Do the logic for each object.
+				Set<AbstractGameObject> objects = stage.getGameObjectsAt(headx, heady);
+				for(AbstractGameObject object : objects) {
+					snake.eat(object);
+					System.out.println("object -> eat");
+				}
+				
 			}
-			
 			
 			// wait for the remaining time, until the next tick.
 			try {
