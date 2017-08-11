@@ -2,8 +2,6 @@ package com.liamtbrand.snake.controller.concrete;
 
 import com.liamtbrand.snake.controller.AbstractGameObject;
 import com.liamtbrand.snake.model.IGameObjectModel;
-import com.liamtbrand.snake.model.IGameObjectModel.Type;
-import com.liamtbrand.snake.model.concrete.BasicGameObjectModel;
 
 public class WormholeObject extends AbstractGameObject {
 	
@@ -18,7 +16,7 @@ public class WormholeObject extends AbstractGameObject {
 
 	@Override
 	public void onEat() {
-		eaten = false;
+		destroy = false;
 	}
 
 }

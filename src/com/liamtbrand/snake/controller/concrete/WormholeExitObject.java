@@ -11,7 +11,7 @@ public class WormholeExitObject extends AbstractGameObject {
 
 	@Override
 	public void onEat() {
-		eaten = false;
+		destroy = false;
 	}
 
 }

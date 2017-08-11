@@ -4,12 +4,12 @@ import com.liamtbrand.snake.model.IGameObjectModel;
 
 public abstract class AbstractGameObject {
 	
-	protected boolean eaten;
+	protected boolean destroy;
 	public final IGameObjectModel model;
 	
 	public AbstractGameObject(IGameObjectModel model) {
 		this.model = model;
-		eaten = false;
+		destroy = false;
 	}
 	
 	/**
@@ -17,7 +17,7 @@ public abstract class AbstractGameObject {
 	 * The object specific behaviour should be implemented in onEat().
 	 */
 	public final void eat() {
-		eaten = true;
+		destroy = true;
 		onEat();
 	}
 	
@@ -25,5 +25,13 @@ public abstract class AbstractGameObject {
 	 * Object specific behaviour.
 	 */
 	public abstract void onEat();
+	
+	/**
+	 * Used to clean up game objects from the stage.
+	 * @return
+	 */
+	public boolean destroyed() {
+		return destroy;
+	}
 	
 }

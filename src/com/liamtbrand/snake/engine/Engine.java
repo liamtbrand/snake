@@ -13,22 +13,8 @@ public abstract class Engine {
 
 	public IStage stage;
 	
-	public Engine() {
-	}
-	
-	/**
-	 * Changes the current map the engine is running.
-	 * This will reset the stage, and all game variables.
-	 * @param map
-	 * @throws Exception
-	 */
-	@Deprecated
-	public void selectMap(IMapModel map) throws Exception {
-		//if(!running) {
-			stage = new Stage(map);
-		//}else {
-		//	throw new Exception("Can't select a map while the engine is running!");
-		//}
+	public Engine(IStage stage) {
+		this.stage = stage;
 	}
 	
 	/**
@@ -56,14 +42,12 @@ public abstract class Engine {
 			Set<AbstractSnake> otherSnakes = stage.getSnakesAt(headx, heady);
 			if(otherSnakes.size() > 0) {
 				snake.die(); // We crashed, so die.
-				System.out.println("snake -> die");
 				continue;
 			}
 			
 			// Check for walls
 			if(stage.getMap().isWall(headx, heady)) {
 				snake.die(); // Death of the snake, we hit a wall!
-				System.out.println("wall -> die");
 				continue;
 			} else {
 				snake.model.moveTo(
@@ -76,7 +60,10 @@ public abstract class Engine {
 			Set<AbstractGameObject> objects = stage.getGameObjectsAt(headx, heady);
 			for(AbstractGameObject object : objects) {
 				snake.eat(object);
-				System.out.println("object -> eat");
+				if(object.destroyed() == true) {
+					stage.removeGameObject(object);
+					System.out.println("Removed object: "+object.hashCode());
+				}
 			}
 			
 		}

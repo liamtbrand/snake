@@ -4,12 +4,12 @@ import com.liamtbrand.snake.model.ISnakeModel;
 
 public abstract class AbstractSnake {
 	
-	private boolean alive;
+	private boolean destroy;
 	public final ISnakeModel model;
 	
 	public AbstractSnake(ISnakeModel model) {
 		this.model = model;
-		alive = true;
+		destroy = false;
 	}
 	
 	/**
@@ -21,7 +21,7 @@ public abstract class AbstractSnake {
 	 * When a snake dies, this method should be invoked.
 	 */
 	public final void die() {
-		alive = false;
+		destroy = true;
 		onDie();
 	}
 	
@@ -30,5 +30,13 @@ public abstract class AbstractSnake {
 	 * for when the snake dies.
 	 */
 	public abstract void onDie();
+	
+	/**
+	 * Used to clean up snakes from the stage.
+	 * @return
+	 */
+	public boolean destroyed() {
+		return destroy;
+	}
 	
 }

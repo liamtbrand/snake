@@ -23,6 +23,7 @@ import com.liamtbrand.snake.engine.EngineTicker;
 import com.liamtbrand.snake.model.IGameObjectModel;
 import com.liamtbrand.snake.model.concrete.BasicGameObjectModel;
 import com.liamtbrand.snake.model.concrete.BasicSnakeModel;
+import com.liamtbrand.snake.model.concrete.Stage;
 import com.liamtbrand.snake.model.concrete.test.TestMap;
 import com.liamtbrand.snake.view.BlockRenderEngine;
 
@@ -30,14 +31,8 @@ public class SinglePlayerGame {
 
 	public static void main(String[] args) {
 		
-		Engine engine = new Engine();
-		
-		// Setup the engine with a simple testing map.
-		try {
-			engine.selectMap(new TestMap());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Stage stage = new Stage(new TestMap());
+		Engine engine = new Engine(stage);
 		
 		// Setup the render engine to render using the block render engine.
 		BlockRenderEngine rEngine = new BlockRenderEngine(20);
