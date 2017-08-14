@@ -19,7 +19,10 @@ import com.liamtbrand.snake.controller.concrete.FoodObject;
 import com.liamtbrand.snake.controller.concrete.Snake;
 import com.liamtbrand.snake.controller.concrete.WormholeExitObject;
 import com.liamtbrand.snake.controller.concrete.WormholeObject;
+import com.liamtbrand.snake.engine.Engine;
 import com.liamtbrand.snake.engine.EngineTicker;
+import com.liamtbrand.snake.engine.mechanic.AbstractMechanic;
+import com.liamtbrand.snake.engine.mechanic.SpawnFoodMechanic;
 import com.liamtbrand.snake.model.IGameObjectModel;
 import com.liamtbrand.snake.model.concrete.BasicGameObjectModel;
 import com.liamtbrand.snake.model.concrete.BasicSnakeModel;
@@ -46,6 +49,8 @@ public class SinglePlayerGame {
 		engine.stage.addGameObject(new FoodObject(new BasicGameObjectModel(5,6,IGameObjectModel.Type.FOOD)));
 		engine.stage.addGameObject(new WormholeObject(new BasicGameObjectModel(10,1,IGameObjectModel.Type.WORMHOLE), 12, 14));
 		engine.stage.addGameObject(new WormholeExitObject(new BasicGameObjectModel(12,14,IGameObjectModel.Type.WORMHOLE)));
+		
+		AbstractMechanic spawnFood = new SpawnFoodMechanic(engine);
 		
 		JFrame frame = new JFrame();
 		

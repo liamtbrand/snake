@@ -1,20 +1,22 @@
 package com.liamtbrand.snake.engine;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import com.liamtbrand.snake.controller.AbstractGameObject;
 import com.liamtbrand.snake.controller.AbstractSnake;
 import com.liamtbrand.snake.controller.IStage;
-import com.liamtbrand.snake.model.IMapModel;
-import com.liamtbrand.snake.model.concrete.Stage;
+import com.liamtbrand.snake.engine.mechanic.AbstractMechanic;
 
-public abstract class Engine {
+public class Engine {
 
 	public IStage stage;
+	private Set<AbstractMechanic> mechanics;
 	
 	public Engine(IStage stage) {
 		this.stage = stage;
+		this.mechanics = new HashSet<AbstractMechanic>();
 	}
 	
 	/**
@@ -62,10 +64,35 @@ public abstract class Engine {
 				snake.eat(object);
 				if(object.destroyed() == true) {
 					stage.removeGameObject(object);
-					System.out.println("Removed object: "+object.hashCode());
 				}
 			}
 			
+		}
+		
+		// Game mechanics, run them all!
+		for(AbstractMechanic mechanic : mechanics) {
+			mechanic.run();
+		}
+	}
+	
+	/**
+	 * Adds a game mechanic. Each mechanic should be runnable.
+	 * The mechanics will be run on each tick.
+	 * @param mechanic
+	 */
+	public void addMechanic(AbstractMechanic mechanic) {
+		if(!mechanics.contains(mechanic)) {
+			mechanics.add(mechanic);
+		}
+	}
+	
+	/**
+	 * Removes a game mechanic.
+	 * @param mechanic
+	 */
+	public void removeMechanic(AbstractMechanic mechanic) {
+		if(mechanics.contains(mechanic)) {
+			mechanics.remove(mechanic);
 		}
 	}
 	
