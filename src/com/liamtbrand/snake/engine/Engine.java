@@ -14,9 +14,15 @@ public class Engine {
 	public IStage stage;
 	private Set<AbstractMechanic> mechanics;
 	
+	/**
+	 * Snakes should be added to this set if they are to be removed from the stage at the end of the tick.
+	 */
+	private Set<AbstractSnake> snakesToRemove;
+	
 	public Engine(IStage stage) {
 		this.stage = stage;
 		this.mechanics = new HashSet<AbstractMechanic>();
+		this.snakesToRemove = new HashSet<AbstractSnake>();
 	}
 	
 	/**
@@ -44,7 +50,10 @@ public class Engine {
 			Set<AbstractSnake> otherSnakes = stage.getSnakesAt(headx, heady);
 			if(otherSnakes.size() > 0) {
 				snake.die(); // We crashed, so die.
-				continue;
+				if(snake.destroyed() == true) {
+					snakesToRemove.add(snake);
+					continue;
+				}
 			}
 			
 			// Check for walls
@@ -67,6 +76,11 @@ public class Engine {
 				}
 			}
 			
+		}
+		
+		// Remove all snakes from stage that have been marked for destruction
+		for(AbstractSnake destroyedSnake : snakesToRemove) {
+			stage.removeSnake(destroyedSnake);
 		}
 		
 		// Game mechanics, run them all!
