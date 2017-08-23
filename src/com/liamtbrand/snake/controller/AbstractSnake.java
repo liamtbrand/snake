@@ -2,9 +2,11 @@ package com.liamtbrand.snake.controller;
 
 import com.liamtbrand.snake.model.ISnakeModel;
 
+// TODO : Use dependency injections
+
 public abstract class AbstractSnake {
 	
-	private boolean destroy;
+	protected boolean destroy;
 	public final ISnakeModel model;
 	
 	public AbstractSnake(ISnakeModel model) {
