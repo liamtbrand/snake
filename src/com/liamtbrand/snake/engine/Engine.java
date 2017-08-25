@@ -59,7 +59,10 @@ public class Engine {
 			// Check for walls
 			if(stage.getMap().isWall(headx, heady)) {
 				snake.die(); // Death of the snake, we hit a wall!
-				continue;
+				if(snake.destroyed() == true) {
+					snakesToRemove.add(snake);
+					continue;
+				}
 			} else {
 				snake.model.moveTo(
 					(headx+stage.getMap().getWidth())%stage.getMap().getWidth(),
@@ -74,6 +77,10 @@ public class Engine {
 				if(object.destroyed() == true) {
 					stage.removeGameObject(object);
 				}
+				if(snake.destroyed() == true) {
+					snakesToRemove.add(snake);
+					continue;
+				}
 			}
 			
 		}
@@ -82,6 +89,7 @@ public class Engine {
 		for(AbstractSnake destroyedSnake : snakesToRemove) {
 			stage.removeSnake(destroyedSnake);
 		}
+		snakesToRemove.clear();
 		
 		// Game mechanics, run them all!
 		for(AbstractMechanic mechanic : mechanics) {
