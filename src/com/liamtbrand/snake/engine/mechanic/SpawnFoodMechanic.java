@@ -19,7 +19,7 @@ public class SpawnFoodMechanic extends AbstractMechanic {
 	@Override
 	public void run() {
 		if(food == null || food.destroyed()) {
-			int newFoodX = new Random().nextInt(engine.stage.getMap().getWidth());
+			int newFoodX = new Random().nextInt(1);
 			int newFoodY = new Random().nextInt(engine.stage.getMap().getHeight());
 			if(!engine.stage.getMap().isWall(newFoodX, newFoodY)) {
 				food = new FoodObject(new BasicGameObjectModel(newFoodX, newFoodY, IGameObjectModel.Type.FOOD));

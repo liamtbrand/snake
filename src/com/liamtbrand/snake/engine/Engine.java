@@ -46,6 +46,22 @@ public class Engine {
 			headx = snake.model.getSegmentX(0)+dx;
 			heady = snake.model.getSegmentY(0)+dy;
 			
+			Set<AbstractGameObject> objects;
+			
+			// Do the logic for each object. // TODO REMOVE THIS!!! THIS IS TEMPORARY FIX
+			objects = stage.getGameObjectsAt(headx, heady);
+			for(AbstractGameObject object : objects) {
+				snake.eat(object);
+				if(object.destroyed() == true) {
+					stage.removeGameObject(object);
+				}
+				if(snake.destroyed() == true) {
+					snakesToRemove.add(snake);
+					continue;
+				}
+			}
+			// ---------------------- TEMP FIX END --------
+			
 			// Do the logic for each foreign snake.
 			Set<AbstractSnake> otherSnakes = stage.getSnakesAt(headx, heady);
 			if(otherSnakes.size() > 0) {
@@ -71,7 +87,7 @@ public class Engine {
 			}
 			
 			// Do the logic for each object.
-			Set<AbstractGameObject> objects = stage.getGameObjectsAt(headx, heady);
+			objects = stage.getGameObjectsAt(headx, heady);
 			for(AbstractGameObject object : objects) {
 				snake.eat(object);
 				if(object.destroyed() == true) {
@@ -82,7 +98,6 @@ public class Engine {
 					continue;
 				}
 			}
-			
 		}
 		
 		// Remove all snakes from stage that have been marked for destruction
